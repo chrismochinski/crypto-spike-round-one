@@ -1,8 +1,17 @@
 import './App.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Typography, AppBar, CssBaseline, Container, Toolbar, Grid } from '@material-ui/core';
-import { Info, Home, Money } from '@material-ui/icons';
+import { Typography, AppBar, CssBaseline, Container, Toolbar } from '@material-ui/core';
+import { Info, Home } from '@material-ui/icons';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
 
 import useStyles from './styles.js';
 import Coin from './Coin.js';
@@ -19,7 +28,7 @@ function App() {
 
 
   useEffect(() => {
-    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=50&page=1&sparkline=false')
+    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=20&page=1&sparkline=false')
       .then(res => {
         setCoins(res.data);
         console.log(res.data);
@@ -33,20 +42,20 @@ function App() {
 
 
   // option 1 - large numbers have commas added
-//   function numberWithCommas(mc) {
-//     return mc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // found on StackOverflow (duh) - puts commas in
-// }
+  //   function numberWithCommas(mc) {
+  //     return mc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // found on StackOverflow (duh) - puts commas in
+  // }
 
-//whoa...
-function shortenBigNumber (value) {
-  const suffixes = ["", "K", "M", "B","T"];
-  let suffixNum = Math.floor((""+value).length/3);
-  let shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000,suffixNum)) : value).toPrecision(4));
-  if (shortValue % 1 != 0) {
+  //whoa...
+  function shortenBigNumber(value) {
+    const suffixes = ["", "K", "M", "B", "T"];
+    let suffixNum = Math.floor(("" + value).length / 3);
+    let shortValue = parseFloat((suffixNum !== 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(4));
+    if (shortValue % 1 !== 0) {
       shortValue = shortValue.toFixed(2);
+    }
+    return shortValue + suffixes[suffixNum];
   }
-  return shortValue+suffixes[suffixNum];
-}
 
 
 
@@ -62,7 +71,7 @@ function shortenBigNumber (value) {
         <Toolbar className={classes.topLinks}>
           <Container className={classes.iconLinks}>
             <a href="https://localhost:3000" target="_blank"><Home /></a>
-            <a href="https://www.coingecko.com/" target="_blank"><Money /></a>
+            <a href="https://www.coingecko.com/" target="_blank"><MonetizationOnIcon /></a>
             <a href="https://github.com/chrismochinski/material-ui-crash-course" target="_blank"><Info /></a>
           </Container>
           <Container className={classes.wordLinks}>
@@ -74,32 +83,60 @@ function shortenBigNumber (value) {
       </AppBar>
 
 
-
       <main>
         <div>
           <Container maxWidth="sm" className={classes.main}>
             <Typography variant="h5">Search</Typography>
             <form>
-              <input type="text" placeholder="search" className="coinInput" onChange={handleChange}/>
+              <input type="text" placeholder="search" className="coinInput" onChange={handleChange} />
             </form>
           </Container>
         </div>
-        {filteredCoins.map(coin => {
-          return (
-            <Coin 
-            key={coin.id} 
-            name={coin.name} 
-            image={coin.image} 
-            symbol={coin.symbol}
-            marketCap={shortenBigNumber(coin.market_cap)}
-            price={coin.current_price.toLocaleString()}
-            priceChange={coin.price_change_percentage_24h}
-            
-            />
-          )
-        })}
 
 
+
+        <table className="center">
+          <thead>
+            <tr>
+              <th>Icon</th>
+              <th>Name</th>
+              <th>Ticker</th>
+              <th>Current Price</th>
+              <th>Market Cap</th>
+              <th>24h Price Change</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            {filteredCoins.map(coin => {
+              return (
+                <Coin
+                  id={coin.id}
+                  image={coin.image}
+                  name={coin.name}
+                  symbol={coin.symbol}
+                  price={coin.current_price.toLocaleString()}
+                  marketCap={shortenBigNumber(coin.market_cap)}
+                  priceChange={coin.price_change_percentage_24h}
+                />
+
+              )
+            })}
+
+          </tbody>
+        </table>
+
+
+
+        <footer className={classes.footer}>
+          <Typography variant="h6" align="center" gutterBottom>
+            Footer
+          </Typography>
+          <Typography variant="subtitle1" align="center" color="textSecondary">
+            Something here to give the footer a purpose
+          </Typography>
+        </footer>
 
       </main>
 

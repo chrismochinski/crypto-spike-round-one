@@ -54,3 +54,11 @@ a {
 .downRed {
   color: red;
 }
+
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+
+}

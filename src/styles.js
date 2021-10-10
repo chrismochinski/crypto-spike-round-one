@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { StylesContext } from '@material-ui/styles'
 
+
 const useStyles = makeStyles((them) => ({
     title: {
         fontFamily: 'Montserrat',
@@ -24,6 +25,14 @@ const useStyles = makeStyles((them) => ({
    },
    main: {
        padding: '20px',
+   },
+
+   container: {
+        padding: '50px',
+   },
+
+   coinIcon: {
+       width: '60px',
    }
 
 
