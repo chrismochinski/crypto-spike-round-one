@@ -1,39 +1,50 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { StylesContext } from '@material-ui/styles'
+// import { StylesContext } from '@material-ui/styles'
 
 
-const useStyles = makeStyles((them) => ({
+const useStyles = makeStyles((theme) => ({
     title: {
         fontFamily: 'Montserrat',
     },
     subtitle: {
-        padding: '10px 0',
-        margin: '10px 0',
-        marginLeft: '20px',
-        marginRight: '20px',
+        padding: '5px 0',
+        margin: '5px 0',
+        marginLeft: '30px',
+        marginRight: '30px',
         color: "yellow",
         fontFamily: 'Montserrat',
+        fontSize: '15px',
     },
     AppBar: {
+
     },
 
-   iconLinks:{
-       justifyContent: 'flex-start',
-   },
-   iconWords:{
-       justifyContent: "flex-end",
-   },
-   main: {
-       padding: '20px',
-   },
+    iconLinks: {
+        textAlign: 'left',
+    
+    },
+    iconWords: {
+        textAlign: 'right',
+    },
 
-   container: {
-        padding: '50px',
-   },
+    main: {
+        padding: '20px',
+    },
 
-   coinIcon: {
-       width: '60px',
-   }
+
+    coinIcon: {
+        width: '40px',
+    },
+
+    tableRow: {
+        cursor: 'pointer',
+    },
+
+
+
+    footer: {
+        paddingTop: '10px',
+    }
 
 
 
