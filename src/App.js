@@ -6,6 +6,7 @@ import { Info, Home } from '@material-ui/icons';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 import Table from "@material-ui/core/Table";
+import TableContainer from '@mui/material/TableContainer';
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
@@ -93,40 +94,41 @@ function App() {
           </Container>
         </div>
 
+    <Paper elevation={6} sx={{ width: '100%', overflow: 'hidden' }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table className="center" stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Icon</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Ticker</TableCell>
+                <TableCell>Current Price</TableCell>
+                <TableCell>Market Cap</TableCell>
+                <TableCell>24h Price Change</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
 
 
-        <table className="center">
-          <thead>
-            <tr>
-              <th>Icon</th>
-              <th>Name</th>
-              <th>Ticker</th>
-              <th>Current Price</th>
-              <th>Market Cap</th>
-              <th>24h Price Change</th>
-            </tr>
-          </thead>
-          <tbody>
+              {filteredCoins.map(coin => {
+                return (
+                  <Coin
+                    id={coin.id}
+                    image={coin.image}
+                    name={coin.name}
+                    symbol={coin.symbol}
+                    price={coin.current_price.toLocaleString()}
+                    marketCap={shortenBigNumber(coin.market_cap)}
+                    priceChange={coin.price_change_percentage_24h}
+                  />
 
+                )
+              })}
 
-            {filteredCoins.map(coin => {
-              return (
-                <Coin
-                  id={coin.id}
-                  image={coin.image}
-                  name={coin.name}
-                  symbol={coin.symbol}
-                  price={coin.current_price.toLocaleString()}
-                  marketCap={shortenBigNumber(coin.market_cap)}
-                  priceChange={coin.price_change_percentage_24h}
-                />
-
-              )
-            })}
-
-          </tbody>
-        </table>
-
+            </TableBody>
+          </Table>
+        </TableContainer>
+        </Paper>
 
 
         <footer className={classes.footer}>
