@@ -9,21 +9,23 @@ import useStyles from './styles.js';
 
 
 
-                //use reduxStore ins
+                //important use reduxStore!!!!
+
 function Coin({ id, name, image, symbol, price, marketCap, priceChange }) {
 
     const history = useHistory();
 
     const classes = useStyles();
 
-    const getDetails = () => { 
-        history.push('/coin-details')
+    const getDetails = (id, name, image, symbol, price, marketCap, priceChange) => { 
+        console.log('coin id:', id)
+        history.push(`/coin-details/`)
     }
 
     
     return (
                                                        
-                    <TableRow className={classes.tableRow} onClick={() => getDetails()} key={id}>
+                    <TableRow className={classes.tableRow} onClick={() => getDetails(id, name, image, symbol, price, marketCap, priceChange)} key={id}>
                         <TableCell><img className={classes.coinIcon} src={image} alt="icon" /></TableCell>
                         <TableCell><h4>{name}</h4></TableCell>
                         <TableCell><p className="coinSymbol">{symbol.toUpperCase()}</p></TableCell>
