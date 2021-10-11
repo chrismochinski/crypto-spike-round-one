@@ -10,7 +10,7 @@ import { CssBaseline } from '@material-ui/core';
 
 
 
-import useStyles from './styles.js';
+// import useStyles from './styles.js';
 import CoinDetail from './CoinDetail.js';
 
 
@@ -19,7 +19,10 @@ import CoinDetail from './CoinDetail.js';
 
 function App() {
 
-  const classes = useStyles();
+  // const classes = useStyles();
+
+
+
 
 
   return (
@@ -33,13 +36,17 @@ function App() {
 
           <Header />
 
-          <Route exact path='/coin-details' >
+          <Route exact path="/coin-details" >
             <CoinDetail />
           </Route>
 
-          <SearchForm />
+          <Route exact path="/coin-search">
+            <SearchForm />
+          </Route>
 
-          <CoinTableHead />
+          <Route exact path='/'>
+            <CoinTableHead />
+          </Route>
 
           <Footer />
 

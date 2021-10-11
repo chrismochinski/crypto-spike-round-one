@@ -25,11 +25,11 @@ function Header() {
                         <a className={classes.about}>About</a>
                     </Container>
                 </Toolbar>
-                <Typography className={classes.title} variant="h4">Mo's CoinGecko API Spike</Typography>
+                <Typography className={classes.title} variant="h5"><b>Mo's CoinGecko API Spike</b></Typography>
                 <Typography
                     className={classes.subtitle}
-                    variant="h6">
-                    Testing the CoinGecko API as well as implementing some of the Material UI stuff from my first spike
+                    variant="h5">
+                    Don't Get Carried Away Now! 
                 </Typography>
             </AppBar>
         </div>

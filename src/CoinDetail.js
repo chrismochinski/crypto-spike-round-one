@@ -1,9 +1,9 @@
 import React from 'react';
-import { Typography, CssBaseline, Container } from '@material-ui/core';
-import { useHistory, HashRouter as Router, Route } from 'react-router-dom';
+import { Typography, Container } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
-import useStyles from './styles.js';
+// import useStyles from './styles.js';
 
 
 
@@ -15,7 +15,7 @@ function CoinDetail() {
     }
 
     const history = useHistory();
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <Container>

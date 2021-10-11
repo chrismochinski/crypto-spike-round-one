@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
     iconLinks: {
         textAlign: 'left',
-    
+
     },
     iconWords: {
         textAlign: 'right',
@@ -36,18 +36,42 @@ const useStyles = makeStyles((theme) => ({
         width: '40px',
     },
 
-    tableRow: {
-        cursor: 'pointer',
+    assetHeader: {
+        padding: '30px',
+        margin: '20px',
+        backgroundColor: 'paper',
     },
 
+    tableRow: {
+        cursor: 'pointer',
+        paddingTop: '50px',
+        textAlign: 'center',
+    },
+
+    // assetHeadline: {
+    //     textAlign: 'left',
+    //     paddingLeft: '40px',
+    // },
+
+    addButton: {
+        textAlign: 'right',
+    },
 
 
     footer: {
         paddingTop: '10px',
-    }
+    },
 
-
-
+    tableCell: {
+        textAlign: 'center',
+        padding: '0',
+    },
+ 
+    searchPaper: {
+        
+        paddingTop: '20px',
+        paddingBottom: '200px',
+    },
 
 }))
 

@@ -1,8 +1,8 @@
 import './App.css';
 
 import React from 'react';
-import { HashRouter as Router, Route, } from 'react-router-dom';
-import { Typography, CssBaseline, Container } from '@material-ui/core';
+// import { HashRouter as Router, Route, } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 import useStyles from './styles.js';
 
 
