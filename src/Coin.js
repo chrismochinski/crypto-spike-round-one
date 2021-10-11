@@ -11,7 +11,7 @@ import useStyles from './styles.js';
 
                 //important use reduxStore!!!!
 
-function Coin({ id, name, image, symbol, price, marketCap, priceChange }) {
+function Coin({ id, name, image, symbol, price, marketCap, priceChange, shortenBigNumber }) {
 
     const history = useHistory();
 

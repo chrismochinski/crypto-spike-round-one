@@ -47,6 +47,10 @@ a {
   margin: 4px;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 .upGreen {
   color: green;
 }
@@ -78,3 +82,5 @@ footer {
 .coinIcon:hover {
   transform: rotate(360deg);
 }
+
+

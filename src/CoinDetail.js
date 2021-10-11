@@ -19,7 +19,7 @@ function CoinDetail() {
 
     return (
         <Container>
-            <Typography>BEEF PANTS!!!!</Typography>
+            <Typography variant="h2">Coin Detail Page</Typography>
             <Button variant="contained" onClick={() => navBack()}>Go Back</Button>
         </Container>
     );

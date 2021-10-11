@@ -1,28 +1,33 @@
 import useStyles from './styles.js';
-import React, { useState, useEffect } from 'react';
-import { Typography, CssBaseline, Container, Card } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Typography, CssBaseline, Container, Card, CardMedia, CardContent, CardActions, Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 import Paper from "@material-ui/core/Paper";
-import axios from 'axios';
+import { useHistory } from 'react-router-dom'
+
+// import axios from 'axios';
 
 
 
 
 
-function SearchForm() {
+function SearchForm({ coins }) {
 
     const classes = useStyles();
+    const history = useHistory();
 
-    const [coins, setCoins] = useState('');
     const [newSearch, setNewSearch] = useState('');
     const [newCoinName, setNewCoinName] = useState('');
     const [newCoinImageSource, setNewCoinImageSource] = useState('');
     const [search, setSearch] = useState('');
+    const [searchArray, setSearchArray] = useState([]);
 
     let coinToRender = '';
 
-    const handleChange = () => {
+
+    const handleChange = (event) => {
+        event.preventDefault();
         console.log('new search is:', newSearch)
         for (let i = 0; i < coins.length; i++) {
             if (
@@ -30,20 +35,20 @@ function SearchForm() {
                 coins[i].symbol == newSearch ||
                 coins[i].name == newSearch ||
                 coins[i].image == newSearch) {
-                console.log(coins[i]);
+                searchArray.unshift(coins[i])
+            } else {
+                console.log('no results')
             }
-        }
 
+        }
+        console.log(searchArray)
+        setNewSearch('');
     }
 
-
-    useEffect(() => {
-        axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false')
-            .then(res => {
-                setCoins(res.data);
-                console.log('Coin response is:', res.data);
-            }).catch(error => console.log('error getting cryptos:', error))
-    }, []);
+    const getDetails = (id, name, image, symbol, price, marketCap, priceChange) => {
+        console.log('coin id:', id)
+        history.push(`/coin-details/`)
+    }
 
 
     return (
@@ -60,6 +65,7 @@ function SearchForm() {
                             size="small"
                             type="text"
                             // helperText="Search For A Cryptocurrency"
+                            value={newSearch}
                             className="coinInput"
                             label="Search For A Coin"
                             onChange={(event) => setNewSearch(event.target.value)}
@@ -68,9 +74,45 @@ function SearchForm() {
 
                     </form>
 
+
+
+
+
+
+                    {searchArray.map((card) => (
+                        <Grid style={{paddingTop: '40px', width: '80%', marginLeft: 'auto', marginRight: 'auto'}} item key={card}>
+                            <Card onClick={() => getDetails(card.id)} style={{ cursor: 'pointer'}} className={classes.card}  >
+                                <CardMedia
+                                    className={classes.cardMedia}
+                                    component="img"
+                                    height="140"
+                                    image={card.image}
+                                    title="Image Title"
+                                    alt="Image Broken"
+                                />
+                                <CardContent className={classes.cardContent}>
+                                    <Grid>
+                                        <Grid item className={classes.floatLeft} xs={12} s={10} md={10} lg={10} xl={10}>
+                                            <Typography variant="h6">
+                                                {card.name} || {card.symbol.toUpperCase()} || ${card.current_price.toFixed(2)}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item className={classes.floatRight} xs={12} s={2} md={2} lg={2} xl={2}>
+                                            <CardActions>
+                                                <Button variant="outlined" size="small" color="primary">Details</Button>
+                                            </CardActions>
+                                        </Grid>
+                                    </Grid>
+                                </CardContent>
+
+                            </Card>
+                        </Grid>
+                    ))}
                     <h1>{search}</h1>
                     <h1>{newCoinName}</h1>
                     <img src={newCoinImageSource} />
+
+
                 </Container>
             </Paper>
         </div>
@@ -100,3 +142,6 @@ export default SearchForm;
     //     console.log('new coin name:', response.name)
     //     console.log('coin image source:', response.image.small)
     // }
+
+    // <h1 >{coin.symbol}</h1>
+    // <img onClick={() => getDetails(coin.id)} width="50px" src={coin.image} />

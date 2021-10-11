@@ -75,6 +75,16 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
     },
 
+    floatLeft: {
+        width: '100%',
+        margin: 'auto',
+    },
+
+    floatRight: {
+        width: '100%',
+        margin: 'auto',
+    },
+
 }))
 
 export default useStyles;
