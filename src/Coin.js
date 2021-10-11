@@ -9,32 +9,37 @@ import useStyles from './styles.js';
 
 
 
-                //important use reduxStore!!!!
+//important use reduxStore!!!!
 
 function Coin({ id, name, image, symbol, price, marketCap, priceChange, shortenBigNumber }) {
 
     const history = useHistory();
-
     const classes = useStyles();
 
-    const getDetails = (id, name, image, symbol, price, marketCap, priceChange) => { 
+    const getDetails = (id, name, image, symbol, price, marketCap, priceChange) => {
         console.log('coin id:', id)
         history.push(`/coin-details/`)
     }
 
-    
+ 
+
+
     return (
-                                                       
-                    <TableRow className={classes.tableRow} onClick={() => getDetails(id, name, image, symbol, price, marketCap, priceChange)} key={id}>
-                        <TableCell className={classes.tableCell}><img className={classes.coinIcon} src={image} alt="icon" /></TableCell>
-                        <TableCell className={classes.tableCell}><h4>{name}</h4></TableCell>
-                        <TableCell className={classes.tableCell}><p className="coinSymbol">{symbol.toUpperCase()}</p></TableCell>
-                        <TableCell className={classes.tableCell}> <p className="coinPrice">${price}</p></TableCell>
-                        <TableCell className={classes.tableCell}> <p className="coinMarketCap">${marketCap}</p></TableCell>
-                        <TableCell className={classes.tableCell}> {priceChange < 0 ? (<p className="downRed"><KeyboardArrowDownIcon />{priceChange.toFixed(2)}%</p>) : (<p className="upGreen"> <KeyboardArrowUpIcon /> {priceChange.toFixed(2)}%</p>)}</TableCell>
-                    </TableRow>
-               
+
+
+        <TableRow className={classes.tableRow} onClick={() => getDetails(id, name, image, symbol, price, marketCap, priceChange)} key={id}>
+            <TableCell className={classes.tableCell}><img className={classes.coinIcon} src={image} alt="icon" /></TableCell>
+            <TableCell className={classes.tableCell}><h4>{name}</h4></TableCell>
+            <TableCell className={classes.tableCell}><p className="coinSymbol">{symbol.toUpperCase()}</p></TableCell>
+            <TableCell className={classes.tableCell}> <p className="coinPrice">${price}</p></TableCell>
+            <TableCell className={classes.tableCell}> <p className="coinMarketCap">${marketCap}</p></TableCell>
+            <TableCell className={classes.tableCell}> {priceChange < 0 ? (<p className="downRed"><KeyboardArrowDownIcon />{priceChange.toFixed(2)}%</p>) : (<p className="upGreen"> <KeyboardArrowUpIcon /> {priceChange.toFixed(2)}%</p>)}</TableCell>
+        </TableRow>
+
     )
+
+   
+
 }
 
 export default Coin;

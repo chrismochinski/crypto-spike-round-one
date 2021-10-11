@@ -26,13 +26,16 @@ function CoinTableHead() {
     const classes = useStyles();
     const [coins, setCoins] = useState([])
     const history = useHistory();
+    const [isLoading, setIsLoading] = useState(false); //idea not working on separate component
 
 
     useEffect(() => {
+        setIsLoading(true);
         axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=50&page=1&sparkline=false')
             .then(res => {
                 setCoins(res.data);
                 console.log('Coin response is:', res.data);
+                setIsLoading(false);
             }).catch(error => console.log('error getting cryptos:', error))
     }, []);
 
@@ -53,20 +56,26 @@ function CoinTableHead() {
     }
 
 
+    const renderPage = () => {
+        if (isLoading) {
+            return <div>Loading Crypto List...</div> //idea loading?
+        }
+    }
+
 
     return (
         <Container className={classes.tableMain}>
             <Paper className={classes.assetHeader} elevation={10}>
                 <Grid container spacing={2}>
                     <Grid item className={classes.assetHeadline} xs={12} s={10} md={10} lg={10} xl={10}>
-                        <Typography variant="h4" style={{color: '#F70C8A'}}>No Assets Yet</Typography>
+                        <Typography variant="h4" style={{ color: '#F70C8A' }}>No Assets Yet</Typography>
                     </Grid>
                     <Grid item className={classes.addButton} xs={12} s={2} md={2} lg={2} xl={2}>
-                        <Button 
-                        variant="outlined" 
-                        size="small" 
-                        onClick={handleAddClick}
-                        style={{backgroundColor: '#3f51b5', color: 'white'}}><b>Add</b></Button>
+                        <Button
+                            variant="outlined"
+                            size="small"
+                            onClick={handleAddClick}
+                            style={{ backgroundColor: '#3f51b5', color: 'white' }}><b>Add</b></Button>
                     </Grid>
                 </Grid>
             </Paper>
@@ -108,10 +117,15 @@ function CoinTableHead() {
 
                         </TableBody>
                     </Table>
+                    <Container>
+                        <Typography style={{padding: "40px" }} variant="h3">{renderPage()}</Typography> 
+                    </Container>
                 </TableContainer>
             </Paper>
         </Container>
     )
+
+
 }
 
 export default CoinTableHead;
