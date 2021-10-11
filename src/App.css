@@ -74,3 +74,7 @@ footer {
   font-size: 90%;
   color: black;
 }
+
+.coinIcon:hover {
+  transform: rotate(360deg);
+}

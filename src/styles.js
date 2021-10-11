@@ -71,6 +71,8 @@ const useStyles = makeStyles((theme) => ({
         
         paddingTop: '20px',
         paddingBottom: '200px',
+        width: '90%',
+        margin: 'auto',
     },
 
 }))
